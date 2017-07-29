@@ -33,6 +33,8 @@ def all():
 @auth.login_required
 def update_profile():
     user = g.user
+    keys = ["preferred_sports", "gender", "age", "available_start", "available_end", "location"]
+    
     for key in keys:
         if key in request.json:
             setattr(user, key, request.json.get(key))
