@@ -56,7 +56,7 @@ def get_activity_by_preferences():
         prepare_json_response(
             message=None,
             success=True,
-            data={'activity':activity.serialize, "message": message}
+            data={'activity':activity.serialize, "message": message, 'going_to_rain': going_to_rain, 'rain_percentage': rain_percentage}
         )
     )
         
