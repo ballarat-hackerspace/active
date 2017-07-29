@@ -26,7 +26,7 @@ auth = HTTPBasicAuth()
 app.config.from_object("config")
 
 #-- Models
-from app.models import user
+from app.models import user, activity
 
 if not os.path.exists("db.sqlite"):
     db.create_all()
@@ -34,9 +34,11 @@ if not os.path.exists("db.sqlite"):
 #-- Controllers
 from app.controllers import default
 from app.controllers import user
+from app.controllers import activity
 
 app.register_blueprint(default.mod)
 app.register_blueprint(user.mod)
+app.register_blueprint(activity.mod)
 
 #-- Error handlers
 
