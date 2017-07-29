@@ -82,7 +82,7 @@ def is_it_going_to_rain():
     if r.status_code != 200:
         return None, None
 
-    prediciton = r.json()
+    prediction = r.json()
     if 'data' in prediction:
         if 'attributes' in prediction['data']:
             if 'probability_of_precipitation' in prediction['data']['attributes']:
