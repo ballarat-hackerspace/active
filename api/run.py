@@ -13,5 +13,7 @@
     :license: MIT, see LICENSE for more details
 """
 from app import app
+import os
 
-app.run(host="localhost", port=5000, debug=True)
+print("Goto: https://active-robertlayton.c9users.io")
+app.run(host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT", 5000)), debug=True)
