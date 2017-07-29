@@ -13,6 +13,23 @@ $("#clear").click(function() {
   //$('.notice').text('Data cleared');
 });
 
+// todo, .get the list of activities from API https://ballarathacker.space/api/activity/list
+
+// Accept an activity
+var accept_xhr;
+
+$("accept_notification").click(function(){
+
+  accept_xhr = $.get( "https://ballarathacker.space/api/activity/accept", function() {
+    alert( "success" );
+  }).done(function() {
+    alert( "second success" );
+  })
+
+
+})
+
+
 
 function load_settings() {
     if ( !(localStorage.getItem("gender") === null) ) { $('#gender').val(localStorage.gender); }
