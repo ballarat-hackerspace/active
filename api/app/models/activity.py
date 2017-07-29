@@ -38,4 +38,4 @@ class Activity(db.Model):
                "type":self.type,
                "time":self.time.strftime("%Y-%m-%d %H:%M:%S"),
                "location": {"lat": self.latitude, "lon": self.longitude},
-               "created": True}
+               "created": True, "indoors": self.indoors, "outdoors": self.outdoors}
