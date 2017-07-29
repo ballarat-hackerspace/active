@@ -15,6 +15,17 @@ $("#clear").click(function() {
 
 // todo, .get the list of activities from API https://ballarathacker.space/api/activity/list
 
+// Accept an activity
+var accept_xhr;
+
+$("accept_notification").click(function(){
+
+  accept_xhr = $.get( "https://ballarathacker.space/api/activity/accept", { name: "Brett", action: "accept" })
+  .done(function() {
+    // Load success screen
+  })
+
+})
 
 
 

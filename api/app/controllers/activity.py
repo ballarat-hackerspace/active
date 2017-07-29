@@ -24,19 +24,25 @@ mod = Blueprint("activity", __name__, url_prefix="/api")
 
 @mod.route("/activity", methods=["GET", "POST"])
 def get_activity_by_preferences():
-    activity_type = request.json.get("activity_type", None)
-    going_to_rain, rain_percentage = is_it_going_to_rain()
+    data = request.json
     
+    if not data:
+        data = {}
+    
+    activity_type = data.get("activity_type", None)
+    going_to_rain, rain_percentage = is_it_going_to_rain()
+
     activities = []
+    message = "We found an activity for you!"
     
     # Find only activities of this type
     activities = [activity for activity in Activity.query.all()
                       # If an activity type not given, of if one was given and its of this type
                   if ((not activity_type) or activity.type == activity_type)
                        # if its indoor, it doesn't matter if its going to rain
-                  and ((activity.indoor) or 
+                  and ((activity.indoors) or 
                        # Only suggest outdoor activities if it isn't going to rain 
-                       (activity.outdoor and not is_rain))
+                       (activity.outdoors and not going_to_rain))
                  ]
 
     if not activities:
@@ -45,9 +51,9 @@ def get_activity_by_preferences():
         activities = [activity for activity in Activity.query.all()
                       # If an activity type not given, of if one was given and its of this type
                   if  # if its indoor, it doesn't matter if its going to rain
-                      ((activity.indoor) or 
+                      ((activity.indoors) or 
                        # Only suggest outdoor activities if it isn't going to rain 
-                       (activity.outdoor and not is_rain))
+                       (activity.outdoors and not going_to_rain))
                  ]
 
     # If we found valid activities, choose one of the activities received at random and return it
@@ -58,7 +64,7 @@ def get_activity_by_preferences():
         prepare_json_response(
             message=None,
             success=True,
-            data={'activity':activity.serialize, "message": message}
+            data={'activity':activity.serialize, "message": message, 'going_to_rain': going_to_rain, 'rain_percentage': rain_percentage}
         )
     )
         
@@ -175,7 +181,7 @@ def single(id):
         )
     )
 
-@mod.route("/activity/accept")
+@mod.route("/activity/accept", methods=["POST", "GET"])
 def accept_activity():
     return jsonify(
         prepare_json_response(

@@ -8,7 +8,6 @@
     <title>Notification!</title>
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -22,27 +21,45 @@
     <link rel="stylesheet" href="active.css">
 
   </head>
-  <body>
+  <body class="notification">
     <style="text/css">
     </style>
-    <div class="container">
-      <h1>Guess what?</h1>
+    <div class="found container">
+      <h1>Activity found!</h1>
       <div class="notification-text">
         <p>New footy game at <b>Ballarat Football field</b>, interested?</p>
       </div>
       <div class="container-fluid">
         <div class="form-group">
           <div class="row">
-          <div class="form-group col-xxs-6 col-md-2">
-            <button type="submit" value="accept" class="btn btn-lg btn-success btn-default">Accept</button>
+          <div class="form-group col-xxs-6 col-md-12">
+            <button type="submit" value="accept" id="accept_notification" class="btn btn-lg btn-success btn-default">Accept</button>
           </div>
-          <div class="form-group col-xxs-6 col-md-2">
-            <button type="submit" value="reject" class="btn btn-lg btn-default">Reject</button>
+          <div class="form-group col-xxs-6 col-md-12">
+            <button type="submit" value="reject" id="reject_notification" class="btn btn-lg btn-default">Reject</button>
           </div>
         </div>
       </div>
 
       </div>
+</div>
+<div class="success container">
+  <h1>Game on!</h1>
+  <div class="notification-text">
+    <h2>Activity Details:</h2>
+    <a href="https://www.google.com.au/maps/place/Eureka+Stadium/@-37.5391037,143.8460723,17z/data=!3m1!4b1!4m5!3m4!1s0x6ad1444061c10c61:0xef763e10ba88faa8!8m2!3d-37.5391037!4d143.848261" target="_blank">Ballarat football field</a>
+    <h2>Start time:</h2>
+    4:00pm
+    <p>be there!</p>
+  </div>
+  <div class="container-fluid">
+    <div class="form-group">
+      <div class="row">
+
+    </div>
+  </div>
+
+  </div>
 </div>
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -50,6 +67,6 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script type="text/javascript" src="client.js"></script>
+    <script type="text/javascript" src="notification_client.js"></script>
   </body>
 </html>
