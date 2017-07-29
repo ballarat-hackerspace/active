@@ -43,7 +43,43 @@
   <div class="settings container">
     <div class="form">
       <h1>Settings</h1>
-        <p>My Face sport</p>
+      <div class="form-group">
+         <label for="gender">Gender</label>
+         <input type="text" class="form-control" id="gender" name="gender" placeholder="Gender">
+       </div>
+
+       <div class="form-group">
+          <label for="age">Gender</label>
+          <input type="text" class="form-control" id="age" name="age" placeholder="age">
+        </div>
+
+        <div class="form-group">
+           <label for="age">availability</label>
+           <div class="row">
+             <div class="col-xxs-6 col-md-2">
+           <input type="text" class="form-control" id="starttime" name="starttime" placeholder="from">
+           <select class="form-control" id="starttime">
+               <option value="01:00">01:00</option>
+               <option value="02:00">02:00</option>
+               <option value="03:00">03:00</option>
+               <option value="04:00">04:00</option>
+               <option value="05:00">05:00</option>
+               <option value="06:00">06:00</option>
+               <option value="07:00">07:00</option>
+               <option value="08:00">08:00</option>
+               <option value="09:00">09:00</option>
+               <option value="10:00">10:00</option>
+               <option value="11:00">11:00</option>
+               <option value="12:00">12:00</option>
+           </select>
+           -
+         </div>
+         <div class="col-xxs-6 col-md-2">
+           <input type="text" class="form-control" id="endtime" name="endtime" placeholder="to">
+         </div>
+         </div>
+       </div>
+
     </div>
   </div>
     <!-- jQuery library -->
