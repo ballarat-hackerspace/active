@@ -20,11 +20,20 @@ mod = Blueprint("activity", __name__, url_prefix="/api")
 
 @mod.route("/activity", methods=["GET", "POST"])
 def get_random_activity():
+    activity = Activity.get_random_activity()
+    data = {"activity": activity.serialize}
+    if activity.indoors:
+        message = "It's going to rain! Let's choose an indoor activity."
+    else:
+        message = "It's a lovely day outsite, let's choose an outdoor activity."
+    
+    data['message'] = message
+    
     return jsonify(
         prepare_json_response(
             message=None,
             success=True,
-            data=[Activity.get_random_activity().serialize]
+            data=[activity.serialize]
         )
     )
 
