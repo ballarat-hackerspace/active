@@ -22,7 +22,12 @@ mod = Blueprint("activity", __name__, url_prefix="/api")
 
 @mod.route("/activity", methods=["GET", "POST"])
 def get_activity_by_preferences():
-    activity_type = request.json.get("activity_type", None)
+    data = request.json
+    
+    if not data:
+        data = {}
+    
+    activity_type = data.get("activity_type", None)
     going_to_rain, rain_percentage = is_it_going_to_rain()
     
     activities = []
