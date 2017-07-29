@@ -52,9 +52,23 @@ def add_some():
     activity3.time = datetime.strptime("2017-07-29 15:03:00", "%Y-%m-%d %H:%M:%S")
     activity3.type = "Squash"
     
+    activity4 = Activity()
+    activity4.latitude = 144.4
+    activity4.longitude = -34.4
+    activity4.time = datetime.strptime("2017-07-29 16:04:00", "%Y-%m-%d %H:%M:%S")
+    activity4.type = "Laser Tag"
+    
+    activity5 = Activity()
+    activity5.latitude = 145.5
+    activity5.longitude = -35.5
+    activity5.time = datetime.strptime("2017-07-29 17:05:00", "%Y-%m-%d %H:%M:%S")
+    activity5.type = "FPV Drone Racing"
+    
     db.session.add(activity1)
     db.session.add(activity2)
     db.session.add(activity3)
+    db.session.add(activity4)
+    db.session.add(activity5)
     db.session.commit()
 
     return jsonify({"success": True})
