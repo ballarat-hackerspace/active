@@ -17,7 +17,8 @@ from app import db, auth
 
 mod = Blueprint("activity", __name__, url_prefix="/api")
 
-@mod.route("/activity", methods=["GET"])
+
+@mod.route("/activity", methods=["GET", "POST"])
 def get_random_activity():
     return jsonify(
         prepare_json_response(
@@ -73,7 +74,7 @@ def add_some():
 
     return jsonify({"success": True})
 
-@mod.route("/list", methods=["GET"])
+@mod.route("/activity/list", methods=["GET"])
 def all():
     return jsonify(
         prepare_json_response(
