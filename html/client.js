@@ -8,7 +8,7 @@ $("#save").click(function() {
 
 //Clear Data
 $("#clear").click(function() {
-  $.jStorage.flush();
+  localStorage.clear();
   //clear_all();
   //$('.notice').text('Data cleared');
 });
