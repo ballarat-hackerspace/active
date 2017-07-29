@@ -29,7 +29,7 @@ def get_activity_by_preferences():
     
     activity_type = data.get("activity_type", None)
     going_to_rain, rain_percentage = is_it_going_to_rain()
-    
+
     activities = []
     
     # Find only activities of this type
@@ -39,7 +39,7 @@ def get_activity_by_preferences():
                        # if its indoor, it doesn't matter if its going to rain
                   and ((activity.indoors) or 
                        # Only suggest outdoor activities if it isn't going to rain 
-                       (activity.outdoors and not is_rain))
+                       (activity.outdoors and not going_to_rain))
                  ]
 
     if not activities:
@@ -50,7 +50,7 @@ def get_activity_by_preferences():
                   if  # if its indoor, it doesn't matter if its going to rain
                       ((activity.indoors) or 
                        # Only suggest outdoor activities if it isn't going to rain 
-                       (activity.outdoors and not is_rain))
+                       (activity.outdoors and not going_to_rain))
                  ]
 
     # If we found valid activities, choose one of the activities received at random and return it
