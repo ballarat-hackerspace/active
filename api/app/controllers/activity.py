@@ -156,7 +156,7 @@ def single(id):
         )
     )
 
-@mod.route("/activity/accept")
+@mod.route("/activity/accept", methods=["POST", "GET"])
 def accept_activity():
     return jsonify(
         prepare_json_response(
