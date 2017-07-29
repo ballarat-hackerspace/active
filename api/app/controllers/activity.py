@@ -94,7 +94,7 @@ def is_it_going_to_rain():
                     for p in prediction['data']['attributes']['probability_of_precipitation']['forecast_data']:
                         dt = parser.parse(p['time'])
                         if dt > time_now:
-                            rain_percent = float(p['value'])/100.0
+                            rain_percentage = float(p['value'])/100.0
                             going_to_rain = rain_percentage > 0.5
                             break
                     return going_to_rain, rain_percentage
