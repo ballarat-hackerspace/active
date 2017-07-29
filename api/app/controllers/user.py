@@ -15,7 +15,9 @@ from app.utils import *
 from app.models.user import User
 from app import db, auth
 
+
 mod = Blueprint("user", __name__, url_prefix="/api")
+
 
 @mod.route("/users", methods=["GET"])
 def all():
@@ -27,7 +29,23 @@ def all():
         )
     )
 
-@mod.route("/user", methods=["POST"])
+@mod.route("/user/profile", methods=["GET", "POST"])
+@auth.login_required
+def update_profile():
+    user = g.user
+    for key in keys:
+        if key in request.json:
+            setattr(user, key, request.json.get(key))
+
+    return jsonify(
+        prepare_json_response(
+            message="User found",
+            success=True,
+            data=user.serialize
+        )
+    )
+
+@mod.route("/user/login", methods=["POST"])
 def create():
     """
     $ curl -i -X POST -H "Content-Type: application/json" -d '{"username":"user","password":"python"}' http://localhost:5000/api/user
@@ -52,6 +70,7 @@ def create():
             data={"username": a_user.username}
         )
     ), 201, {"Location": url_for("user.single", id=a_user.id)}
+
 
 @mod.route("/users/<int:id>", methods=["GET"])
 def single(id):
@@ -90,6 +109,7 @@ def token():
             data={"token": token.decode("ascii"), "duration":600}
         )
     )
+    
 
 @auth.verify_password
 def verify_password(username_or_token, password):
