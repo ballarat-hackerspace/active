@@ -109,3 +109,11 @@ def single(id):
         )
     )
 
+@mod.route("/activity/accept")
+def accept_activity():
+    return jsonify(
+        prepare_json_response(
+            message="Activity accepted",
+            success=True,
+        )
+    )
