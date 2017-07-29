@@ -14,6 +14,8 @@ from flask import abort, Blueprint, request, jsonify, g, url_for
 from app.utils import *
 from app.models.activity import Activity
 from app import db, auth
+from dateutil import parser
+from datetime import datetime, timezone
 import random
 
 
@@ -63,11 +65,34 @@ def get_activity_by_preferences():
         
 def is_it_going_to_rain():
     # @srw put BOM stuff here
-    rain_percentage = random.random()
-    going_to_rain = rain_percentage > 0.5  # Actually make a decision here
-    
-    
-    return going_to_rain, rain_percentage
+    ballarat_geohash = 'r1q63d4'
+    bom_api = 'https://api.cloud.bom.gov.au/forecasts/v1/grid/three-hourly/%s/precipitation'
+    bom_key = 'rmRCkYgM2Y1TffChzB8JtaJxzd6dv2SU4dIk0tj7'
+
+    r = requests.get(bom_api % ballarat_geohash,
+                     headers={"accept": "application/vnd.api+json",
+                              "x-api-key": bom_key })
+
+    if r.status_code != 200:
+        return None, None
+
+    prediciton = r.json()
+    if 'data' in prediction:
+        if 'attributes' in prediction['data']:
+            if 'probability_of_precipitation' in prediction['data']['attributes']:
+                if 'forecast_data' in prediction['data']['attributes']['probability_of_precipitation']:
+                    next_three_hours = None
+                    time_now = datetime.now(timezone.utc)
+                    rain_percentage = None
+                    going_to_rain = None
+                    for p in prediction['data']['attributes']['probability_of_precipitation']['forecast_data']:
+                        dt = parser.parse(p['time'])
+                        if dt > time_now:
+                            rain_percent = float(p['value'])/100.0
+                            going_to_rain = rain_percentage > 0.5
+                            break
+                    return going_to_rain, rain_percentage
+    return None, None
 
 
 @mod.route("/activity/add")
