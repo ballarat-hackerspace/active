@@ -31,6 +31,7 @@ def get_activity_by_preferences():
     going_to_rain, rain_percentage = is_it_going_to_rain()
 
     activities = []
+    message = "We found an activity for you!"
     
     # Find only activities of this type
     activities = [activity for activity in Activity.query.all()
