@@ -14,28 +14,60 @@ from flask import abort, Blueprint, request, jsonify, g, url_for
 from app.utils import *
 from app.models.activity import Activity
 from app import db, auth
+import random
+
 
 mod = Blueprint("activity", __name__, url_prefix="/api")
 
 
 @mod.route("/activity", methods=["GET", "POST"])
-def get_random_activity():
-    activity = Activity.get_random_activity()
-    data = {"activity": activity.serialize}
-    if activity.indoors:
-        message = "It's going to rain! Let's choose an indoor activity."
-    else:
-        message = "It's a lovely day outsite, let's choose an outdoor activity."
+def get_activity_by_preferences():
+    activity_type = request.json.get("activity_type", None)
+    going_to_rain, rain_percentage = is_it_going_to_rain()
     
-    data['message'] = message
+    activities = []
     
+    # Find only activities of this type
+    activities = [activity for activity in Activity.query.all()
+                      # If an activity type not given, of if one was given and its of this type
+                  if ((not activity_type) or activity.type == activity_type)
+                       # if its indoor, it doesn't matter if its going to rain
+                  and ((activity.indoor) or 
+                       # Only suggest outdoor activities if it isn't going to rain 
+                       (activity.outdoor and not is_rain))
+                 ]
+
+    if not activities:
+        message = "I couldn't find that"
+        # Couldn't find an activity. This would really only happen if an activity was asked for, so choose one from the other activities
+        activities = [activity for activity in Activity.query.all()
+                      # If an activity type not given, of if one was given and its of this type
+                  if  # if its indoor, it doesn't matter if its going to rain
+                      ((activity.indoor) or 
+                       # Only suggest outdoor activities if it isn't going to rain 
+                       (activity.outdoor and not is_rain))
+                 ]
+
+    # If we found valid activities, choose one of the activities received at random and return it
+    activity = random.choice(activities)
+    
+    data = {"activity": activity.serialize, 'message': message}
     return jsonify(
         prepare_json_response(
             message=None,
             success=True,
-            data=[activity.serialize]
+            data={'activity':activity.serialize, "message": message}
         )
     )
+        
+        
+def is_it_going_to_rain():
+    # @srw put BOM stuff here
+    rain_percentage = random.random()
+    going_to_rain = rain_percentage > 0.5  # Actually make a decision here
+    
+    
+    return going_to_rain, rain_percentage
 
 
 @mod.route("/activity/add")
@@ -124,5 +156,6 @@ def accept_activity():
         prepare_json_response(
             message="Activity accepted",
             success=True,
+            data={}
         )
     )
