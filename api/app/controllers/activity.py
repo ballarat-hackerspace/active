@@ -37,9 +37,9 @@ def get_activity_by_preferences():
                       # If an activity type not given, of if one was given and its of this type
                   if ((not activity_type) or activity.type == activity_type)
                        # if its indoor, it doesn't matter if its going to rain
-                  and ((activity.indoor) or 
+                  and ((activity.indoors) or 
                        # Only suggest outdoor activities if it isn't going to rain 
-                       (activity.outdoor and not is_rain))
+                       (activity.outdoors and not is_rain))
                  ]
 
     if not activities:
@@ -48,9 +48,9 @@ def get_activity_by_preferences():
         activities = [activity for activity in Activity.query.all()
                       # If an activity type not given, of if one was given and its of this type
                   if  # if its indoor, it doesn't matter if its going to rain
-                      ((activity.indoor) or 
+                      ((activity.indoors) or 
                        # Only suggest outdoor activities if it isn't going to rain 
-                       (activity.outdoor and not is_rain))
+                       (activity.outdoors and not is_rain))
                  ]
 
     # If we found valid activities, choose one of the activities received at random and return it
