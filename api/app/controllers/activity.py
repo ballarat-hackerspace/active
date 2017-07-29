@@ -17,6 +17,7 @@ from app import db, auth
 from dateutil import parser
 from datetime import datetime, timezone
 import random
+import requests
 
 
 mod = Blueprint("activity", __name__, url_prefix="/api")
