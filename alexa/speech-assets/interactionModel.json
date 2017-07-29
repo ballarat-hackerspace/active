@@ -1,0 +1,128 @@
+{
+  "intents": [
+    {
+      "name": "AMAZON.CancelIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.HelpIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.StopIntent",
+      "samples": []
+    },
+    {
+      "name": "ListActivities",
+      "samples": [
+        "what can i do",
+        "what can i do {setting}",
+        "what might i do",
+        "list activities",
+        "give me a list"
+      ],
+      "slots": [
+        {
+          "name": "setting",
+          "type": "Settings",
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "StartActivity",
+      "samples": [
+        "find me something to do",
+        "i want to play {activity}",
+        "i'd like to play {activity}",
+        "should i play outside"
+      ],
+      "slots": [
+        {
+          "name": "activity",
+          "type": "Activities",
+          "samples": []
+        }
+      ]
+    }
+  ],
+  "types": [
+    {
+      "name": "Activities",
+      "values": [
+        {
+          "id": null,
+          "name": {
+            "value": "football",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "baseball",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "soccer",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "squash",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "indoor cricket",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "cricket",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "basketball",
+            "synonyms": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "Settings",
+      "values": [
+        {
+          "id": null,
+          "name": {
+            "value": "inside",
+            "synonyms": [
+              "in doors"
+            ]
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "outside",
+            "synonyms": [
+              "out doors"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
