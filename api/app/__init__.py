@@ -11,7 +11,7 @@
     :license: MIT, see LICENSE for more details
 """
 import os
-from utils import prepare_json_response
+from app.utils import prepare_json_response
 from flask import Flask, jsonify, request
 from werkzeug.contrib.cache import SimpleCache
 from flask.ext.sqlalchemy import SQLAlchemy
