@@ -24,6 +24,8 @@ class Activity(db.Model):
     time = db.Column(db.DateTime())
     latitude = db.Column(db.Float())
     longitude = db.Column(db.Float())
+    indoors = db.Column(db.Boolean(), default=True)
+    outdoors = db.Column(db.Boolean(), default=True)
 
     @staticmethod
     def get_random_activity():

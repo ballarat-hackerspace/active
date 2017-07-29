@@ -39,6 +39,8 @@ def add_some():
     activity1.longitude = -31.1
     activity1.time = datetime.strptime("2017-07-29 13:01:00", "%Y-%m-%d %H:%M:%S")
     activity1.type = "Basketball"
+    activity1.indoors = True
+    activity1.outdoors = True
     
     
     activity2 = Activity()
@@ -46,24 +48,32 @@ def add_some():
     activity2.longitude = -32.2
     activity2.time = datetime.strptime("2017-07-29 14:02:00", "%Y-%m-%d %H:%M:%S")
     activity2.type = "Running"
+    activity2.indoors = False
+    activity2.outdoors = True
     
     activity3 = Activity()
     activity3.latitude = 143.3
     activity3.longitude = -33.3
     activity3.time = datetime.strptime("2017-07-29 15:03:00", "%Y-%m-%d %H:%M:%S")
     activity3.type = "Squash"
+    activity3.indoors = True
+    activity3.outdoors = False
     
     activity4 = Activity()
     activity4.latitude = 144.4
     activity4.longitude = -34.4
     activity4.time = datetime.strptime("2017-07-29 16:04:00", "%Y-%m-%d %H:%M:%S")
     activity4.type = "Laser Tag"
+    activity4.indoors = True
+    activity4.outdoors = False
     
     activity5 = Activity()
     activity5.latitude = 145.5
     activity5.longitude = -35.5
     activity5.time = datetime.strptime("2017-07-29 17:05:00", "%Y-%m-%d %H:%M:%S")
     activity5.type = "FPV Drone Racing"
+    activity5.indoors = True
+    activity5.outdoors = True
     
     db.session.add(activity1)
     db.session.add(activity2)
