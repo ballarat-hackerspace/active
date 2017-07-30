@@ -66,4 +66,8 @@ p.rankings{
 .greeny {
   color: green;
 }
+
+.rating_facility .material-icons{
+  font-size: 44px !important; /* There had to be an !important hack somewhere... */
+  color: yellow;
 }
