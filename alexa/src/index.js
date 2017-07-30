@@ -8,7 +8,7 @@ var OUTDOOR_ACTIVITIES = 'walking, netball, running, football, soccer';
 var handlers = {
     'LaunchRequest': function () {
         logEntry('LaunchRequest', this.event);
-        this.emit(':ask', 'Welcome to dot space active. You can ask for an activity or I can suggest one.')
+        this.emit(':ask', 'Alright let\s get active! You can ask for an activity or I can suggest one.')
     },
     'ListActivities': function () {
         logEntry('ListActivities', this.event);
@@ -32,23 +32,29 @@ var handlers = {
     'AcceptActivity': function () {
         logEntry('AcceptActivity', this.event);
         var acceptance = isSlotValid(this.event.request, 'activity');
-
-
     },
     'StartActivity': function () {
         logEntry('StartActivity', this.event);
         var activity = isSlotValid(this.event.request, 'activity');
         console.log('activity is ' + activity);
         if (this.event.request.dialogState === 'STARTED') {
+            var loc = 'ballarat'; //TODO hard coded for now
+            obtainActivity(loc, myResult => {
+                console.log("received : " + JSON.stringify(myResult));
+                var speechOutput = '';
+                if (activity && activity !== myResult.data.activity.type) {
+                    if (myResult.data.going_to_rain) {
+                        var rainPercent = myResult.data.activity.rain_percentage * 100;
+                        speechOutput += "hmmm there's a " + rainPercent + " percent chance of rain. ";
+                    }
+                    speechOutput += "How about " + myResult.data.activity.type + " instead?"
+                } else {
+                    speechOutput = "How does " + myResult.data.activity.type + " sound?";
+                }
+                this.emit(':confirmIntent', speechOutput);
+            });
 
-                var loc = 'ballarat'; //TODO hard coded
-                //httpsPost(loc, myResult => {
-                obtainActivity(loc, myResult => {
-                    console.log("received : " + JSON.stringify(myResult));
-                    this.emit(':confirmIntent', 'How about ' + myResult.data.activity.type);
-                });
-
-        } else if (this.event.request.dialogState === 'IN_PROGRESS'){
+        } else if (this.event.request.dialogState === 'IN_PROGRESS') {
             console.log('delegating');
             this.emit(':delegate');
         } else {
@@ -58,24 +64,25 @@ var handlers = {
             var confirmation = false;
             if (this.event.request.intent.confirmationStatus === 'CONFIRMED') {
                 confirmation = true;
-            } 
+            }
             // Call back end to confirm/cancel Activity
             acceptActivity('1', confirmation, acceptActivityResult => {
-                var speechOutput = "Sorry there was an error processing your request";
                 if (acceptActivityResult.meta.success) { // successfully called back end to confirm
                     var confirmationString = 'canceled';
-                    if (confirmation)
-                        confirmationString = 'confirmed'
-                    speechOutput = "Ok, your activity has been " + confirmationString;
-                }                    
-
-                this.emit(':tell', speechOutput);
-            });            
+                    if (confirmation) {
+                        this.emit(':tell', "Ok, your activity is all set. You'll receive a confirmation with the details");
+                    } else {
+                        this.emit(':ask', "no worries... would you like to try something else?")
+                    }
+                } else { // Error calling back end
+                    this.emit(':tell', "Sorry there was an error processing your request");
+                }
+            });
         }
     },
     'AMAZON.HelpIntent': function () {
         logEntry('HelpIntent', this.event);
-        speechOutput = "Ask for a particular activity, like walking or indoor cricket. Or we can find you something to do";
+        var speechOutput = "Ask for a particular activity, like walking or indoor cricket. Or we can find you something to do";
         reprompt = "Ask for a suggestion of something to do";
         this.emit(':ask', speechOutput, reprompt);
     },
@@ -124,15 +131,19 @@ function logEntry(str, evt) {
 }
 
 function obtainActivity(location, callback) {
-    httpsPost('/api/activity', {"location": location}, callback);
+    httpsPost('/api/activity', {
+        "location": location
+    }, callback);
 }
 
 function acceptActivity(activityId, confirmation, callback) {
-    httpsPost('/api/activity/accept', {"id": activityId, "confirmation": confirmation}, callback);
+    httpsPost('/api/activity/accept', {
+        "id": activityId,
+        "confirmation": confirmation
+    }, callback);
 }
 
-//function httpsPost(location, callback) {
-function httpsPost(path, value, callback) {    
+function httpsPost(path, value, callback) {
 
     var post_options = {
         host: 'ballarathacker.space',
