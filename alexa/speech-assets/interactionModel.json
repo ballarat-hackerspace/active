@@ -16,10 +16,10 @@
       "name": "ListActivities",
       "samples": [
         "what can i do",
-        "what can i do {setting}",
         "what might i do",
         "list activities",
-        "give me a list"
+        "give me a list",
+        "tell me what i can do"
       ],
       "slots": [
         {
@@ -32,10 +32,18 @@
     {
       "name": "StartActivity",
       "samples": [
-        "find me something to do",
         "i want to play {activity}",
         "i'd like to play {activity}",
-        "should i play outside"
+        "what should i do",
+        "tell me what i should do",
+        "can i play {activity}",
+        "anyone wants to play {activity}",
+        "i think i'd like to play {activity}",
+        "can you suggest something",
+        "please suggest something",
+        "suggest something",
+        "yeah can i play {activity}",
+        "hmm can i play {activity}"
       ],
       "slots": [
         {
@@ -54,7 +62,9 @@
           "id": null,
           "name": {
             "value": "football",
-            "synonyms": []
+            "synonyms": [
+              "footy"
+            ]
           }
         },
         {
@@ -98,6 +108,27 @@
             "value": "basketball",
             "synonyms": []
           }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "laser tag",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "badminton",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "tennis",
+            "synonyms": []
+          }
         }
       ]
     },
@@ -124,5 +155,39 @@
         }
       ]
     }
-  ]
+  ],
+  "prompts": [
+    {
+      "id": "Confirm.Intent-StartActivity",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "Yes or no?"
+        }
+      ]
+    }
+  ],
+  "dialog": {
+    "version": "1.0",
+    "intents": [
+      {
+        "name": "StartActivity",
+        "confirmationRequired": true,
+        "prompts": {
+          "confirm": "Confirm.Intent-StartActivity"
+        },
+        "slots": [
+          {
+            "name": "activity",
+            "type": "Activities",
+            "elicitationRequired": false,
+            "confirmationRequired": false,
+            "prompts": {}
+          }
+        ]
+      }
+    ]
+  }
 }
