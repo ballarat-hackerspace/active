@@ -22,6 +22,21 @@ import requests
 
 mod = Blueprint("activity", __name__, url_prefix="/api")
 
+# Morphed form of http://data.gov.au/geoserver/ballarat-indoor-recreation-facilities/wfs?request=GetFeature&typeName=9006b1fc_9a36_425d_ae2a_6307c37c99c9&outputFormat=json
+facilities = {'Ballarat Badminton Centre Wendouree': ('-37.527529', '143.841871'),
+ 'Ballarat Basketball Centre (Minerdome) Wendouree': ('-37.528130',
+  '143.841241'),
+ 'Ballarat East Recreation Centre Ballarat East': ('-37.560247', '143.892782'),
+ 'Ballarat Netball Centre Golden Point': ('-37.567756', '143.866350'),
+ 'Ballarat Table Tennis Centre Wendouree': ('-37.524810', '143.841591'),
+ 'Buninyong Sports Centre Buninyong': ('-37.653405', '143.886064'),
+ 'Damascus College Mt Clear': ('-37.611270', '143.869159'),
+ 'Delacombe Recreation Centre Delacombe': ('-37.583788', '143.817585'),
+ 'Eastwood Leisure Complex Ballarat': ('-37.565328', '143.862280'),
+ 'The Arch Centre, Ballarat High School Alfredton': ('-37.554031',
+  '143.816944'),
+ 'Wendouree Sports and Events Centre Wendouree': ('-37.535142', '143.843603')}
+
 
 @mod.route("/activity", methods=["GET", "POST"])
 def get_activity_by_preferences():
@@ -108,8 +123,10 @@ def add_some():
     from datetime import datetime
     
     activity1 = Activity()
-    activity1.latitude = 141.1
-    activity1.longitude = -31.1
+    activity_key = 'Ballarat Basketball Centre (Minerdome) Wendouree'
+    activity1.latitude = facilities[activity_key][0]
+    activity1.longitude = facilities[activity_key][1]
+    activity1.facility = activity_key
     activity1.time = datetime.strptime("2017-07-29 13:01:00", "%Y-%m-%d %H:%M:%S")
     activity1.type = "Basketball"
     activity1.indoors = True
@@ -117,32 +134,40 @@ def add_some():
     
     
     activity2 = Activity()
-    activity2.latitude = 142.2
-    activity2.longitude = -32.2
+    activity_key = 'Damascus College Mt Clear'
+    activity2.latitude = facilities[activity_key][0]
+    activity2.longitude = facilities[activity_key][1]
+    activity2.facility = activity_key
     activity2.time = datetime.strptime("2017-07-29 14:02:00", "%Y-%m-%d %H:%M:%S")
     activity2.type = "Running"
     activity2.indoors = False
     activity2.outdoors = True
     
     activity3 = Activity()
-    activity3.latitude = 143.3
-    activity3.longitude = -33.3
+    activity_key = 'Ballarat Table Tennis Centre Wendouree'
+    activity3.latitude = facilities[activity_key][0]
+    activity3.longitude = facilities[activity_key][1]
+    activity3.facility = activity_key
     activity3.time = datetime.strptime("2017-07-29 15:03:00", "%Y-%m-%d %H:%M:%S")
-    activity3.type = "Squash"
+    activity3.type = "Table Tennis"
     activity3.indoors = True
     activity3.outdoors = False
     
     activity4 = Activity()
-    activity4.latitude = 144.4
-    activity4.longitude = -34.4
+    activity_key = 'Delacombe Recreation Centre Delacombe'
+    activity4.latitude = facilities[activity_key][0]
+    activity4.longitude = facilities[activity_key][1]
+    activity4.facility = activity_key
     activity4.time = datetime.strptime("2017-07-29 16:04:00", "%Y-%m-%d %H:%M:%S")
     activity4.type = "Laser Tag"
     activity4.indoors = True
     activity4.outdoors = False
     
     activity5 = Activity()
-    activity5.latitude = 145.5
-    activity5.longitude = -35.5
+    activity_key = 'Eastwood Leisure Complex Ballarat'
+    activity5.latitude = facilities[activity_key][0]
+    activity5.longitude = facilities[activity_key][1]
+    activity5.facility = activity_key
     activity5.time = datetime.strptime("2017-07-29 17:05:00", "%Y-%m-%d %H:%M:%S")
     activity5.type = "FPV Drone Racing"
     activity5.indoors = True

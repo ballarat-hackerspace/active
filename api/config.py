@@ -22,6 +22,7 @@ DEBUG = True
 SECRET_KEY = "development_key"
 CACHE_TIMEOUT = 60 * 60 * 15
 APP_NAME = "Flask Skeleton"
+ROOTDIR = os.getcwd()
 
 #-- SQLAlchemy
 SQLALCHEMY_DATABASE_URI = "sqlite:///db.sqlite"

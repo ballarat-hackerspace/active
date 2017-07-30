@@ -41,6 +41,10 @@
           Was Alex skilled?
           <div class="rating_skill website_header"></div>
         </p>
+        <p class='rankings'>
+          How good was the facility?
+          <div class="rating_facility website_header"></div>
+        </p>
 
       </div>
       <div class="col-md-12">
@@ -65,6 +69,9 @@
   			});
   			$('.rating_skill').addRating({
   				fieldId:"ratingSkillId"
+  			});
+  			$('.rating_facility').addRating({
+  				fieldId:"ratingFacilityId"
   			});
 		});
 		
