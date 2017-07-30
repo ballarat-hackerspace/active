@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>dot space active!</title>
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="active.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+
+  </head>
+  <body class="dotspaceactivefront">
+    <div class="container website_header">
+      <h1 class="inside_website_heading"> dot space active <i class="material-icons " style="font-size: 32px;">directions_bike</i></h1>
+    </div>
+  </div>
+  <div class="container">
+    <div class='row'>
+      
+      <div class='col-sm-4 text-center'>
+        <h1>You just played Table Tennis with Alex</h1>
+        <p class='rankings'>
+          Was Alex friendly?
+          <div class="rating_friendly website_header"></div>
+        </p>
+        <p class='rankings'>
+          Was Alex skilled?
+          <div class="rating_skill website_header"></div>
+        </p>
+
+      </div>
+      <div class="col-md-12">
+        <div class='col-md-12 text-center'>
+          <button type="button" id="submit_button" class="btn btn-default get_started_button" onclick="do_submit()">SUBMIT</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="client.js"></script>
+    <script type="text/javascript" src="static/jquery.star.rating.js"></script>
+    <script>
+      $(document).ready(function(){
+  			$('.rating_friendly').addRating({
+  				fieldId:"ratingFriendlyId"
+  			});
+  			$('.rating_skill').addRating({
+  				fieldId:"ratingSkillId"
+  			});
+		});
+		
+		var do_submit = function(){
+		  $("#submit_button").html("<b class=\"greeny\">Done <i class=\"material-icons\">check</i></b>");
+		};
+
+    </script>
+  </body>
+</html>

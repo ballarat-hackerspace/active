@@ -35,3 +35,35 @@ body { background:#FFF;
 .get_started_button{
   font-size: 40px;
 }
+
+.inside_website_heading{
+  
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 32px;
+}
+
+.website_header{
+  background-color: #ddd;
+}
+
+h1{
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+p.rankings{
+  font-size: 32px;
+}
+
+.rating_friendly .material-icons{
+  font-size: 44px !important; /* There had to be an !important hack somewhere... */
+  color: yellow;
+}
+.rating_skill .material-icons{
+  font-size: 44px !important; /* There had to be an !important hack somewhere... */
+  color: yellow;
+}
+
+.greeny {
+  color: green;
+}
+}
